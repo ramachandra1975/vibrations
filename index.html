@@ -1,0 +1,1112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>🎵 Classical & Contemporary Krithi / Rāga Reference (Karnatic • Hindustani • Folk • Western • Semiclassical)</title>
+
+  <!-- Google Fonts — existing page + new section combined -->
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Kalam:wght@300;400&family=Source+Sans+3:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+
+  <style>
+    /* =====================================================
+       EXISTING PAGE STYLES (preserved exactly)
+       ===================================================== */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: #f9f6f0;
+      color: #2d2d2d;
+      min-height: 100vh;
+    }
+
+    header {
+      background: linear-gradient(135deg, #2c1810 0%, #8b4513 50%, #d4a017 100%);
+      color: #fff;
+      padding: 1.5rem 2rem 1.2rem;
+      text-align: center;
+    }
+    header h1 {
+      font-size: clamp(1.1rem, 2.5vw, 1.6rem);
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      line-height: 1.35;
+    }
+    header p {
+      font-size: 0.82rem;
+      opacity: 0.8;
+      margin-top: 0.35rem;
+    }
+
+    main {
+      max-width: 860px;
+      margin: 2rem auto;
+      padding: 0 1.2rem;
+    }
+
+    /* Section cards */
+    .section-card {
+      background: #fff;
+      border: 1px solid #e0cdb0;
+      border-radius: 10px;
+      padding: 1.6rem;
+      margin-bottom: 1.8rem;
+      box-shadow: 0 2px 12px rgba(100,60,10,0.06);
+    }
+    .section-card h2 {
+      font-size: 1.05rem;
+      color: #5c2d0a;
+      margin-bottom: 1.1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid #f0d9b5;
+      font-weight: 600;
+    }
+
+    /* Form elements — existing style */
+    .form-group {
+      margin-bottom: 0.9rem;
+    }
+    .form-group label {
+      display: block;
+      font-size: 0.82rem;
+      color: #6b3f10;
+      margin-bottom: 0.3rem;
+      font-weight: 500;
+    }
+    .form-group select,
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 0.55rem 0.75rem;
+      border: 1px solid #d4b483;
+      border-radius: 6px;
+      background: #fffdf7;
+      font-size: 0.88rem;
+      color: #2d2d2d;
+      font-family: inherit;
+      outline: none;
+      transition: border-color 0.15s;
+    }
+    .form-group select:focus,
+    .form-group input:focus,
+    .form-group textarea:focus {
+      border-color: #8b4513;
+    }
+    .form-group textarea { min-height: 70px; resize: vertical; }
+
+    .btn-primary {
+      background: #8b4513;
+      color: #fff;
+      border: none;
+      padding: 0.6rem 1.4rem;
+      border-radius: 6px;
+      font-size: 0.88rem;
+      cursor: pointer;
+      font-weight: 600;
+      transition: background 0.15s;
+    }
+    .btn-primary:hover { background: #5c2d0a; }
+    .btn-primary:disabled { background: #c4a07a; cursor: not-allowed; }
+
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; }
+    @media (max-width: 540px) { .form-row { grid-template-columns: 1fr; } }
+
+    .divider-line {
+      border: none;
+      border-top: 1px solid #e0cdb0;
+      margin: 1rem 0;
+    }
+
+    /* Raga reference result area */
+    #raga-result-area {
+      margin-top: 1rem;
+      min-height: 40px;
+    }
+    .result-block {
+      background: #fffdf7;
+      border: 1px solid #dcc89a;
+      border-radius: 8px;
+      padding: 1rem 1.2rem;
+      font-size: 0.88rem;
+      line-height: 1.7;
+      color: #2d2d2d;
+      white-space: pre-wrap;
+    }
+
+    /* Kriti library */
+    #kriti-library-area {
+      margin-top: 0.8rem;
+    }
+    .kriti-loading {
+      color: #a07850;
+      font-style: italic;
+      font-size: 0.88rem;
+      padding: 0.5rem 0;
+    }
+    .kriti-card {
+      border: 1px solid #e8d4aa;
+      border-radius: 7px;
+      padding: 0.8rem 1rem;
+      margin-bottom: 0.7rem;
+      background: #fffdf7;
+    }
+    .kriti-card h4 {
+      font-size: 0.92rem;
+      color: #3b1f02;
+      margin-bottom: 0.25rem;
+    }
+    .kriti-card .meta {
+      font-size: 0.78rem;
+      color: #7a5030;
+    }
+    .kriti-card .meta span {
+      display: inline-block;
+      margin-right: 0.8rem;
+      background: #f5e9d0;
+      padding: 0.1rem 0.45rem;
+      border-radius: 10px;
+    }
+
+    /* Custom raga result */
+    #custom-result-area {
+      margin-top: 1rem;
+    }
+
+    /* Loading dots (existing) */
+    @keyframes dot-pulse { 0%,100%{opacity:0.3} 50%{opacity:1} }
+    .loading-dots span {
+      display: inline-block;
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: #c4883a;
+      margin: 0 2px;
+      animation: dot-pulse 1.1s ease-in-out infinite;
+    }
+    .loading-dots span:nth-child(2) { animation-delay: 0.18s; }
+    .loading-dots span:nth-child(3) { animation-delay: 0.36s; }
+
+    footer {
+      text-align: center;
+      padding: 1.5rem;
+      font-size: 0.78rem;
+      color: #a07850;
+      border-top: 1px solid #e0cdb0;
+      margin-top: 2rem;
+    }
+
+
+    /* =====================================================
+       CELESTIAL SYNTHESIS ENGINE — NEW SECTION
+       All classes prefixed ccs- to avoid any conflict
+       ===================================================== */
+
+    .ccs-root {
+      max-width: 860px;
+      margin: 0 auto 3rem;
+      padding: 0 1.2rem;
+      font-family: 'Source Sans 3', 'Segoe UI', sans-serif;
+    }
+
+    .ccs-section-divider {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin: 2.5rem 0 2rem;
+    }
+    .ccs-section-divider::before,
+    .ccs-section-divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(to right, transparent, #c9a96e, transparent);
+    }
+    .ccs-section-divider span {
+      font-family: 'Cinzel', serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      color: #a07850;
+      white-space: nowrap;
+      text-transform: uppercase;
+    }
+
+    .ccs-heading {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    .ccs-heading h2 {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(1.3rem, 2.8vw, 1.9rem);
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      color: #3b1f02;
+      margin: 0 0 0.4rem;
+      border: none;
+      padding: 0;
+    }
+    .ccs-heading p {
+      font-size: 0.88rem;
+      color: #7a5c3a;
+      font-style: italic;
+      margin: 0;
+      font-family: 'Kalam', cursive;
+      font-weight: 300;
+    }
+
+    /* Query bar */
+    .ccs-querybar {
+      display: flex;
+      border: 1.5px solid #c9a96e;
+      border-radius: 8px;
+      overflow: hidden;
+      background: #fffdf7;
+      box-shadow: 0 2px 16px rgba(180,120,30,0.07);
+      margin-bottom: 0.9rem;
+    }
+    .ccs-querybar input {
+      flex: 1;
+      border: none;
+      outline: none;
+      background: transparent;
+      padding: 0.82rem 1rem;
+      font-size: 0.93rem;
+      font-family: 'Source Sans 3', 'Segoe UI', sans-serif;
+      color: #1a1208;
+    }
+    .ccs-querybar input::placeholder { color: #b09070; font-style: italic; }
+    .ccs-querybar button {
+      background: #8b4513;
+      color: #fdf3e3;
+      border: none;
+      padding: 0 1.4rem;
+      font-family: 'Cinzel', serif;
+      font-size: 0.78rem;
+      letter-spacing: 0.07em;
+      cursor: pointer;
+      transition: background 0.16s;
+      white-space: nowrap;
+    }
+    .ccs-querybar button:hover { background: #5c2d0a; }
+    .ccs-querybar button:disabled { background: #c4a47a; cursor: not-allowed; }
+
+    /* Suggestion pills */
+    .ccs-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+      margin-bottom: 1.8rem;
+    }
+    .ccs-pill {
+      font-size: 0.76rem;
+      padding: 0.25rem 0.7rem;
+      border: 1px solid #d4b483;
+      border-radius: 20px;
+      color: #6b3f10;
+      background: #fdf6ec;
+      cursor: pointer;
+      transition: all 0.14s;
+      font-family: 'Source Sans 3', sans-serif;
+    }
+    .ccs-pill:hover { background: #f0d9b5; border-color: #a0622a; }
+
+    /* Status */
+    .ccs-status {
+      text-align: center;
+      padding: 1.4rem;
+      color: #8b6030;
+      font-style: italic;
+      font-size: 0.88rem;
+      font-family: 'Kalam', cursive;
+      min-height: 48px;
+      display: none;
+    }
+    .ccs-status.visible { display: block; }
+
+    /* Result card */
+    .ccs-result {
+      display: none;
+      background: #fff;
+      border: 1px solid #dcc89a;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 28px rgba(140,80,10,0.08);
+    }
+    .ccs-result.visible { display: block; }
+
+    /* Raga hero */
+    .ccs-raga-header {
+      background: linear-gradient(135deg, #3b1202 0%, #7a3810 55%, #b86d18 100%);
+      padding: 1.8rem 2rem 1.5rem;
+    }
+    .ccs-raga-name {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+      font-weight: 600;
+      color: #fdf3e3;
+      margin: 0 0 0.25rem;
+      letter-spacing: 0.04em;
+    }
+    .ccs-raga-subtitle {
+      color: #f0d9a8;
+      font-size: 0.86rem;
+      margin: 0.35rem 0 0;
+      font-style: italic;
+      font-family: 'Kalam', cursive;
+      font-weight: 300;
+    }
+    .ccs-raga-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+      margin-top: 0.8rem;
+    }
+    .ccs-badge {
+      font-size: 0.72rem;
+      padding: 0.2rem 0.65rem;
+      border-radius: 20px;
+      background: rgba(253,243,227,0.16);
+      color: #fdf3e3;
+      border: 1px solid rgba(253,243,227,0.32);
+      letter-spacing: 0.04em;
+    }
+
+    /* Swara strip */
+    .ccs-swara-strip {
+      background: #260c02;
+      padding: 0.85rem 2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+      flex-wrap: wrap;
+    }
+    .ccs-swara-label {
+      color: #c4883a;
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-family: 'Cinzel', serif;
+      margin-right: 0.4rem;
+      white-space: nowrap;
+    }
+    .ccs-swara-note {
+      font-family: 'Cinzel', serif;
+      font-size: 0.86rem;
+      color: #fdf3e3;
+      padding: 0.18rem 0.55rem;
+      border: 1px solid rgba(196,136,58,0.35);
+      border-radius: 4px;
+      background: rgba(196,136,58,0.1);
+    }
+    .ccs-swara-note.jiva {
+      color: #f5c842;
+      border-color: rgba(245,200,66,0.65);
+      background: rgba(245,200,66,0.12);
+    }
+    .ccs-swara-sep { color: #4a2810; font-size: 0.9rem; }
+
+    /* Body panels */
+    .ccs-panels {
+      padding: 1.4rem 2rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.2rem;
+    }
+    @media (max-width: 560px) {
+      .ccs-panels { grid-template-columns: 1fr; padding: 1rem; }
+      .ccs-raga-header { padding: 1.2rem; }
+      .ccs-swara-strip { padding: 0.7rem 1rem; }
+    }
+    .ccs-panel {
+      background: #fdf6ec;
+      border: 1px solid #e8d4aa;
+      border-radius: 8px;
+      padding: 1rem 1.1rem;
+    }
+    .ccs-panel.wide { grid-column: 1 / -1; }
+    .ccs-panel-title {
+      font-family: 'Cinzel', serif;
+      font-size: 0.68rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #8b4513;
+      margin: 0 0 0.6rem;
+    }
+    .ccs-panel-body {
+      font-size: 0.87rem;
+      line-height: 1.65;
+      color: #2a1505;
+      white-space: pre-wrap;
+    }
+
+    /* Kriti list inside result */
+    .ccs-kriti-list {
+      list-style: none;
+      padding: 0; margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+    }
+    .ccs-kriti-item {
+      padding: 0.55rem 0.8rem;
+      background: #fff9f0;
+      border-left: 3px solid #c4883a;
+      border-radius: 0 6px 6px 0;
+    }
+    .ccs-kriti-item strong {
+      display: block;
+      font-size: 0.86rem;
+      color: #3b1f02;
+      font-family: 'Cinzel', serif;
+      font-weight: 400;
+      letter-spacing: 0.02em;
+    }
+    .ccs-kriti-item span {
+      font-size: 0.76rem;
+      color: #7a5030;
+      font-style: italic;
+    }
+
+    /* Audio synth */
+    .ccs-synth-strip {
+      padding: 0.9rem 2rem;
+      border-top: 1px solid #e8d4aa;
+      background: #fdf6ec;
+      display: flex;
+      align-items: center;
+      gap: 0.9rem;
+      flex-wrap: wrap;
+    }
+    .ccs-synth-label {
+      font-family: 'Cinzel', serif;
+      font-size: 0.68rem;
+      letter-spacing: 0.1em;
+      color: #8b4513;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+    .ccs-synth-note-btn {
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      border: 1.5px solid #c4883a;
+      background: #fff9f0;
+      color: #5c2d0a;
+      font-family: 'Cinzel', serif;
+      font-size: 0.68rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.12s;
+      padding: 0;
+    }
+    .ccs-synth-note-btn:hover { background: #f0d9b5; transform: scale(1.1); }
+    .ccs-synth-note-btn.active { background: #8b4513; color: #fdf3e3; border-color: #8b4513; }
+    .ccs-play-scale-btn {
+      margin-left: auto;
+      background: none;
+      border: 1.5px solid #8b4513;
+      color: #8b4513;
+      padding: 0.38rem 0.9rem;
+      border-radius: 6px;
+      font-family: 'Cinzel', serif;
+      font-size: 0.72rem;
+      letter-spacing: 0.06em;
+      cursor: pointer;
+      transition: all 0.14s;
+    }
+    .ccs-play-scale-btn:hover { background: #8b4513; color: #fdf3e3; }
+
+    /* Explore footer */
+    .ccs-result-footer {
+      padding: 0.9rem 2rem;
+      border-top: 1px solid #e8d4aa;
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .ccs-explore-label {
+      font-size: 0.74rem;
+      color: #a07850;
+      font-style: italic;
+      font-family: 'Kalam', cursive;
+    }
+    .ccs-explore-pill {
+      font-size: 0.76rem;
+      padding: 0.25rem 0.7rem;
+      border: 1px solid #c4883a;
+      border-radius: 20px;
+      color: #6b3f10;
+      background: #fff9f0;
+      cursor: pointer;
+      transition: all 0.14s;
+    }
+    .ccs-explore-pill:hover { background: #f0d9b5; }
+
+    /* Loader */
+    @keyframes ccs-pulse { 0%,100%{opacity:0.3} 50%{opacity:1} }
+    .ccs-dots span {
+      display: inline-block;
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: #c4883a;
+      margin: 0 2px;
+      animation: ccs-pulse 1.2s ease-in-out infinite;
+    }
+    .ccs-dots span:nth-child(2) { animation-delay: 0.2s; }
+    .ccs-dots span:nth-child(3) { animation-delay: 0.4s; }
+  </style>
+</head>
+<body>
+
+  <!-- =====================================================
+       EXISTING PAGE — preserved exactly
+       ===================================================== -->
+
+  <header>
+    <h1>🎵 Classical & Contemporary Krithi / Rāga Reference</h1>
+    <p>Karnatic • Hindustani • Folk • Western • Semiclassical</p>
+  </header>
+
+  <main>
+
+    <!-- Section 1: Rāga Parameters -->
+    <div class="section-card">
+      <h2>Rāga Parameters (for reference)</h2>
+      <div class="form-group">
+        <label>Music Style</label>
+        <select id="music-style">
+          <option>Classical (Karnatic)</option>
+          <option>Classical (Hindustani)</option>
+          <option>Semiclassical / Light</option>
+          <option>Folklore / Regional</option>
+          <option>Western / Tonal</option>
+        </select>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Swara Set <span style="font-weight:300;font-size:0.78rem">(any number of swaras, comma‑separated)</span></label>
+          <input type="text" id="swara-set" placeholder="e.g. Sa, Ri, Ga, Ma, Pa, Da, Ni" />
+        </div>
+        <div class="form-group">
+          <label>Śruti / Note Lattice <span style="font-weight:300;font-size:0.78rem">(any size, comma‑separated)</span></label>
+          <input type="text" id="shruti-lattice" placeholder="e.g. 1, 2, 3, 4..." />
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Languages <span style="font-weight:300;font-size:0.78rem">(any combination)</span></label>
+        <input type="text" id="languages" placeholder="Telugu, Sanskrit, Tamil..." />
+      </div>
+      <button class="btn-primary" onclick="generateRaga()">Generate Reference Rāgas</button>
+      <div id="raga-result-area"></div>
+    </div>
+
+    <!-- Section 2: Create Your Own -->
+    <div class="section-card">
+      <h2>Create Your Own Rāga / Krithi</h2>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Your Rāga / Song Name (English)</label>
+          <input type="text" id="custom-raga-name" placeholder="Name your raga..." />
+        </div>
+        <div class="form-group">
+          <label>Aaroha / Scale</label>
+          <input type="text" id="custom-aroha" placeholder="S R G M P D N S" />
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Avaroha / Scale</label>
+          <input type="text" id="custom-avaroha" placeholder="S N D P M G R S" />
+        </div>
+        <div class="form-group">
+          <label>Notes / Description (English)</label>
+          <input type="text" id="custom-notes" placeholder="Mood, time, special character..." />
+        </div>
+      </div>
+      <hr class="divider-line" />
+      <div class="form-group">
+        <label>Krithi / Song Title (English)</label>
+        <input type="text" id="custom-kriti-title" placeholder="Title of your composition..." />
+      </div>
+      <div class="form-group">
+        <label>Lyrics (English)</label>
+        <textarea id="custom-lyrics" placeholder="Enter lyrics here..."></textarea>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Swara / Chord Notation</label>
+          <input type="text" id="custom-swara-notation" placeholder="S R G M..." />
+        </div>
+        <div class="form-group">
+          <label>Western / Staff Notation</label>
+          <input type="text" id="custom-western-notation" placeholder="C D E F..." />
+        </div>
+      </div>
+      <button class="btn-primary" onclick="createCustomKriti()">Create Custom Rāga / Krithi</button>
+      <div id="custom-result-area"></div>
+    </div>
+
+    <!-- Section 3: Classical Kriti Library -->
+    <div class="section-card">
+      <h2>Classical Krithi Library</h2>
+      <p style="font-size:0.82rem;color:#7a5030;margin-bottom:1rem;font-style:italic">
+        References from Syama Śāstry, Tyāgarāja, Dīkṣitar, Annamācārya.<br>
+        Metadata‑style entries for study and inspiration only. Full lyrics and recordings available on Google, YouTube, and Carnatic music archives.
+      </p>
+      <div id="kriti-library-area">
+        <div class="kriti-loading">
+          Loading krithi library
+          <div class="loading-dots" style="display:inline-flex;margin-left:6px"><span></span><span></span><span></span></div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+
+  <!-- =====================================================
+       COMPLETE CELESTIAL SYNTHESIS — NEW SECTION
+       Starts here. Nothing above is touched.
+       ===================================================== -->
+
+  <div class="ccs-root">
+
+    <div class="ccs-section-divider">
+      <span>Complete Celestial Synthesis</span>
+    </div>
+
+    <div class="ccs-heading">
+      <h2>Complete Celestial Synthesis</h2>
+      <p>Ask anything — a swara, a mood, a composer, a time of day — and receive the raga</p>
+    </div>
+
+    <div class="ccs-querybar">
+      <input
+        type="text"
+        id="ccs-input"
+        placeholder="e.g. evening raga with Pa as soul note… or Nidhi Chala Sukhama… or raga for dawn devotion…"
+        autocomplete="off"
+      />
+      <button id="ccs-btn" onclick="ccsSearch()">Reveal Raga</button>
+    </div>
+
+    <div class="ccs-pills">
+      <span class="ccs-pill" onclick="ccsRun('Raga for early morning meditation')">Early morning meditation</span>
+      <span class="ccs-pill" onclick="ccsRun('Raga with Ga as jiva swara and bhakti rasa')">Ga as jiva swara</span>
+      <span class="ccs-pill" onclick="ccsRun('Thyagaraja kritias in Kalyani raga')">Thyagaraja — Kalyani</span>
+      <span class="ccs-pill" onclick="ccsRun('Dikshitar navagraha kritias and their ragas')">Dikshitar Navagraha cycle</span>
+      <span class="ccs-pill" onclick="ccsRun('Annamacharya sankeertanas in Bhairavi raga')">Annamacharya — Bhairavi</span>
+      <span class="ccs-pill" onclick="ccsRun('Sampurna ragas with all 7 swaras in aroha and avaroha')">Sampurna ragas</span>
+      <span class="ccs-pill" onclick="ccsRun('Shyama Shastri kritias and their emotional rasa')">Shyama Shastri — rasa</span>
+      <span class="ccs-pill" onclick="ccsRun('Which raga is associated with karuna rasa and rain')">Karuna rasa ragas</span>
+    </div>
+
+    <div class="ccs-status" id="ccs-status">
+      <span id="ccs-status-text">Searching the celestial index</span>
+      <div class="ccs-dots" style="margin-top:6px"><span></span><span></span><span></span></div>
+    </div>
+
+    <div class="ccs-result" id="ccs-result">
+
+      <div class="ccs-raga-header">
+        <div class="ccs-raga-name" id="ccs-raga-name">—</div>
+        <div class="ccs-raga-subtitle" id="ccs-raga-subtitle"></div>
+        <div class="ccs-raga-meta" id="ccs-raga-meta"></div>
+      </div>
+
+      <div class="ccs-swara-strip" id="ccs-swara-strip"></div>
+
+      <div class="ccs-panels">
+        <div class="ccs-panel">
+          <div class="ccs-panel-title">Aarohanam</div>
+          <div class="ccs-panel-body" id="ccs-aroha"></div>
+        </div>
+        <div class="ccs-panel">
+          <div class="ccs-panel-title">Avarohanam</div>
+          <div class="ccs-panel-body" id="ccs-avaroha"></div>
+        </div>
+        <div class="ccs-panel">
+          <div class="ccs-panel-title">Rasa &amp; character</div>
+          <div class="ccs-panel-body" id="ccs-rasa"></div>
+        </div>
+        <div class="ccs-panel">
+          <div class="ccs-panel-title">Gamaka &amp; ornamentation</div>
+          <div class="ccs-panel-body" id="ccs-gamaka"></div>
+        </div>
+        <div class="ccs-panel wide">
+          <div class="ccs-panel-title">Notable kritias</div>
+          <ul class="ccs-kriti-list" id="ccs-kritias"></ul>
+        </div>
+        <div class="ccs-panel wide">
+          <div class="ccs-panel-title">Deeper context</div>
+          <div class="ccs-panel-body" id="ccs-context"></div>
+        </div>
+      </div>
+
+      <div class="ccs-synth-strip">
+        <span class="ccs-synth-label">Play swaras</span>
+        <div id="ccs-synth-btns" style="display:flex;gap:5px;flex-wrap:wrap"></div>
+        <button class="ccs-play-scale-btn" onclick="ccsPlayScale()">Play scale ▶</button>
+      </div>
+
+      <div class="ccs-result-footer">
+        <span class="ccs-explore-label">Explore further:</span>
+        <div id="ccs-explore-pills" style="display:flex;gap:0.45rem;flex-wrap:wrap"></div>
+      </div>
+
+    </div>
+  </div>
+
+
+  <footer>
+    <p>culturalmusings.com &nbsp;·&nbsp; Classical &amp; Contemporary Music Reference &nbsp;·&nbsp; For study and inspiration only</p>
+  </footer>
+
+
+  <!-- =====================================================
+       JAVASCRIPT
+       ===================================================== -->
+  <script>
+
+    /* --------------------------------------------------
+       EXISTING PAGE FUNCTIONS
+       -------------------------------------------------- */
+
+    async function generateRaga() {
+      const style   = document.getElementById('music-style').value;
+      const swaras  = document.getElementById('swara-set').value.trim();
+      const shruti  = document.getElementById('shruti-lattice').value.trim();
+      const langs   = document.getElementById('languages').value.trim();
+      const area    = document.getElementById('raga-result-area');
+
+      area.innerHTML = '<div style="color:#8b6030;font-style:italic;font-size:0.85rem;margin-top:0.8rem">Generating <div class="loading-dots" style="display:inline-flex;margin-left:4px"><span></span><span></span><span></span></div></div>';
+
+      try {
+        const prompt = `You are a Carnatic music expert. Given these parameters, suggest 3 matching ragas with brief descriptions.
+Music style: ${style}
+Swara set: ${swaras || 'not specified'}
+Shruti lattice: ${shruti || 'not specified'}
+Languages: ${langs || 'not specified'}
+
+For each raga give: name, aarohanam, avarohanam, rasa, and one notable kriti. Keep each entry concise.`;
+
+        const res  = await fetch('https://api.anthropic.com/v1/messages', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            model: 'claude-sonnet-4-20250514',
+            max_tokens: 900,
+            messages: [{ role: 'user', content: prompt }]
+          })
+        });
+        const data = await res.json();
+        const text = data.content && data.content.find(b => b.type === 'text');
+        area.innerHTML = `<div class="result-block">${(text ? text.text : 'No result').replace(/\n/g,'<br>')}</div>`;
+      } catch(e) {
+        area.innerHTML = '<div class="result-block" style="color:#c0392b">Could not reach the API. Please try again.</div>';
+      }
+    }
+
+    async function createCustomKriti() {
+      const name    = document.getElementById('custom-raga-name').value.trim();
+      const aroha   = document.getElementById('custom-aroha').value.trim();
+      const avaroha = document.getElementById('custom-avaroha').value.trim();
+      const notes   = document.getElementById('custom-notes').value.trim();
+      const title   = document.getElementById('custom-kriti-title').value.trim();
+      const lyrics  = document.getElementById('custom-lyrics').value.trim();
+      const area    = document.getElementById('custom-result-area');
+
+      area.innerHTML = '<div style="color:#8b6030;font-style:italic;font-size:0.85rem;margin-top:0.8rem">Creating <div class="loading-dots" style="display:inline-flex;margin-left:4px"><span></span><span></span><span></span></div></div>';
+
+      try {
+        const prompt = `You are a Carnatic music composition assistant. Analyse and respond to this custom raga / krithi submission.
+Raga name: ${name || 'unnamed'}
+Aaroha: ${aroha || 'not provided'}
+Avaroha: ${avaroha || 'not provided'}
+Notes: ${notes || 'none'}
+Krithi title: ${title || 'none'}
+Lyrics: ${lyrics || 'none'}
+
+Provide: 1) Analysis of whether this matches an existing raga or is novel. 2) Suggested rasa and time. 3) Brief feedback on the composition. Keep it concise and encouraging.`;
+
+        const res  = await fetch('https://api.anthropic.com/v1/messages', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            model: 'claude-sonnet-4-20250514',
+            max_tokens: 700,
+            messages: [{ role: 'user', content: prompt }]
+          })
+        });
+        const data = await res.json();
+        const text = data.content && data.content.find(b => b.type === 'text');
+        area.innerHTML = `<div class="result-block">${(text ? text.text : 'No result').replace(/\n/g,'<br>')}</div>`;
+      } catch(e) {
+        area.innerHTML = '<div class="result-block" style="color:#c0392b">Could not reach the API. Please try again.</div>';
+      }
+    }
+
+    // Load kriti library on page load
+    async function loadKritiLibrary() {
+      const area = document.getElementById('kriti-library-area');
+      try {
+        const res  = await fetch('https://api.anthropic.com/v1/messages', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            model: 'claude-sonnet-4-20250514',
+            max_tokens: 1200,
+            system: 'Return only valid JSON array, no markdown, no explanation.',
+            messages: [{
+              role: 'user',
+              content: `Return a JSON array of 12 well-known kritias from the four composers (Thyagaraja, Dikshitar, Shyama Shastri, Annamacharya). Each entry: {"title":"","composer":"","raga":"","language":"","rasa":""}. Vary the composers and ragas.`
+            }]
+          })
+        });
+        const data  = await res.json();
+        const block = data.content && data.content.find(b => b.type === 'text');
+        if (!block) throw new Error();
+        let raw = block.text.replace(/```json|```/g,'').trim();
+        const list  = JSON.parse(raw);
+        area.innerHTML = list.map(k => `
+          <div class="kriti-card">
+            <h4>${k.title}</h4>
+            <div class="meta">
+              <span>${k.composer}</span>
+              <span>${k.raga}</span>
+              <span>${k.language}</span>
+              <span>${k.rasa}</span>
+            </div>
+          </div>`).join('');
+      } catch(e) {
+        area.innerHTML = '<div class="kriti-loading">Library unavailable — please refresh.</div>';
+      }
+    }
+
+    window.addEventListener('DOMContentLoaded', loadKritiLibrary);
+
+
+    /* --------------------------------------------------
+       CELESTIAL SYNTHESIS ENGINE
+       -------------------------------------------------- */
+
+    const CCS_SWARA_FREQS = {
+      'S':261.63,'R1':275.62,'R2':293.66,'R3':311.13,
+      'G1':275.62,'G2':293.66,'G3':329.63,
+      'M1':349.23,'M2':370.00,
+      'P':392.00,
+      'D1':415.30,'D2':440.00,'D3':466.16,
+      'N1':440.00,'N2':466.16,'N3':493.88,
+      'S2':523.25,
+      'Sa':261.63,'Ri':293.66,'Ga':329.63,'Ma':349.23,
+      'Pa':392.00,'Da':440.00,'Ni':493.88
+    };
+
+    let ccsAudioCtx = null;
+    let ccsCurrentSwaras = [];
+
+    function ccsGetCtx() {
+      if (!ccsAudioCtx) ccsAudioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      return ccsAudioCtx;
+    }
+
+    function ccsPlayTone(freq, when, dur) {
+      const ctx  = ccsGetCtx();
+      const osc  = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.connect(gain); gain.connect(ctx.destination);
+      osc.type = 'triangle';
+      osc.frequency.setValueAtTime(freq, when);
+      gain.gain.setValueAtTime(0, when);
+      gain.gain.linearRampToValueAtTime(0.2, when + 0.05);
+      gain.gain.setValueAtTime(0.2, when + dur * 0.65);
+      gain.gain.linearRampToValueAtTime(0, when + dur);
+      osc.start(when); osc.stop(when + dur + 0.06);
+    }
+
+    window.ccsPlayNote = function(note) {
+      const freq = CCS_SWARA_FREQS[note];
+      if (!freq) return;
+      const btn = document.querySelector(`[data-note="${note}"]`);
+      if (btn) { btn.classList.add('active'); setTimeout(() => btn.classList.remove('active'), 480); }
+      ccsPlayTone(freq, ccsGetCtx().currentTime, 0.75);
+    };
+
+    window.ccsPlayScale = function() {
+      if (!ccsCurrentSwaras.length) return;
+      const ctx = ccsGetCtx();
+      let t = ctx.currentTime + 0.06;
+      ccsCurrentSwaras.forEach(s => {
+        const freq = CCS_SWARA_FREQS[s];
+        if (freq) { ccsPlayTone(freq, t, 0.52); t += 0.58; }
+      });
+    };
+
+    window.ccsRun = function(query) {
+      document.getElementById('ccs-input').value = query;
+      ccsSearch();
+    };
+
+    window.ccsSearch = async function() {
+      const query = document.getElementById('ccs-input').value.trim();
+      if (!query) return;
+
+      const btn    = document.getElementById('ccs-btn');
+      const status = document.getElementById('ccs-status');
+      const result = document.getElementById('ccs-result');
+
+      btn.disabled = true;
+      result.classList.remove('visible');
+      status.classList.add('visible');
+      document.getElementById('ccs-status-text').textContent = 'Searching the celestial index';
+
+      const msgs = [
+        'Consulting the 72 Melakartas',
+        'Reading the shruti lattice',
+        'Finding kritias across all four composers',
+        'Synthesising the raga'
+      ];
+      let mi = 0;
+      const ticker = setInterval(() => {
+        mi = (mi + 1) % msgs.length;
+        document.getElementById('ccs-status-text').textContent = msgs[mi];
+      }, 2000);
+
+      const system = `You are the Complete Celestial Synthesis engine for a Carnatic music knowledge portal.
+
+Given any query — a swara, mood, composer, kriti name, time of day, rasa, or free text — use web search to find accurate information, then identify the single most relevant raga and return ONLY a valid JSON object with no markdown, no preamble, nothing outside the JSON.
+
+Required JSON schema:
+{
+  "ragaName": "full raga name",
+  "melakarta": "parent Melakarta number and name, or Janya with parent",
+  "subtitle": "one evocative sentence about this raga's essence",
+  "badges": ["short strings: time, season, rasa, deity — max 5"],
+  "aroha": "aarohanam using swara codes e.g. S R2 G3 M1 P D2 N3 S",
+  "avaroha": "avarohanam using swara codes",
+  "jivaSwara": ["jiva/vadi swara codes"],
+  "swaraList": ["unique swara codes for playback e.g. S R2 G3 M1 P D2 N3"],
+  "rasa": "2-4 sentences on emotional character, time, devotional context",
+  "gamaka": "2-3 sentences on characteristic gamakas and ornamentation",
+  "kritias": [
+    { "title": "kriti name", "composer": "Thyagaraja|Dikshitar|Shyama Shastri|Annamacharya", "language": "Telugu|Sanskrit|Tamil", "note": "one sentence significance" }
+  ],
+  "context": "3-5 sentences: Melakarta lineage, history, famous performers, theoretical notes",
+  "explorePills": ["3-4 natural follow-up query strings"]
+}
+
+Use web search to verify swara details, kritias, and gamaka information. Return at least 4 kritias. Be precise about swara variants (R1/R2/R3, G1/G2/G3, M1/M2, D1/D2/D3, N1/N2/N3).`;
+
+      try {
+        const res  = await fetch('https://api.anthropic.com/v1/messages', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            model: 'claude-sonnet-4-20250514',
+            max_tokens: 1800,
+            system,
+            tools: [{ type: 'web_search_20250305', name: 'web_search' }],
+            messages: [{ role: 'user', content: query }]
+          })
+        });
+
+        const data  = await res.json();
+        clearInterval(ticker);
+        const block = data.content && data.content.find(b => b.type === 'text');
+        if (!block) throw new Error('no text block');
+        let raw = block.text.trim().replace(/```json|```/g, '').trim();
+        ccsRenderResult(JSON.parse(raw));
+
+      } catch(err) {
+        clearInterval(ticker);
+        document.getElementById('ccs-status-text').textContent = 'Could not reach the synthesis engine. Please try again.';
+        setTimeout(() => status.classList.remove('visible'), 3500);
+      }
+
+      btn.disabled = false;
+    };
+
+    document.getElementById('ccs-input').addEventListener('keydown', e => {
+      if (e.key === 'Enter') ccsSearch();
+    });
+
+    function ccsRenderResult(d) {
+      document.getElementById('ccs-status').classList.remove('visible');
+      document.getElementById('ccs-result').classList.add('visible');
+
+      document.getElementById('ccs-raga-name').textContent    = d.ragaName || '—';
+      document.getElementById('ccs-raga-subtitle').textContent = d.subtitle || '';
+
+      // Badges
+      const metaEl = document.getElementById('ccs-raga-meta');
+      metaEl.innerHTML = '';
+      [...(d.badges || []), d.melakarta].filter(Boolean).forEach(b => {
+        const s = document.createElement('span');
+        s.className = 'ccs-badge'; s.textContent = b;
+        metaEl.appendChild(s);
+      });
+
+      // Swara strip
+      const strip   = document.getElementById('ccs-swara-strip');
+      const arohaArr = (d.aroha || '').split(' ').filter(Boolean);
+      const jiva    = d.jivaSwara || [];
+      strip.innerHTML = '<span class="ccs-swara-label">Swaras</span>';
+      arohaArr.forEach((sw, i) => {
+        const el = document.createElement('span');
+        const isJiva = jiva.some(j => j.replace(/\d/,'') === sw.replace(/\d/,''));
+        el.className = 'ccs-swara-note' + (isJiva ? ' jiva' : '');
+        el.textContent = sw;
+        strip.appendChild(el);
+        if (i < arohaArr.length - 1) {
+          const sep = document.createElement('span');
+          sep.className = 'ccs-swara-sep'; sep.textContent = '·';
+          strip.appendChild(sep);
+        }
+      });
+
+      document.getElementById('ccs-aroha').textContent   = d.aroha   || '';
+      document.getElementById('ccs-avaroha').textContent = d.avaroha || '';
+      document.getElementById('ccs-rasa').textContent    = d.rasa    || '';
+      document.getElementById('ccs-gamaka').textContent  = d.gamaka  || '';
+      document.getElementById('ccs-context').textContent = d.context || '';
+
+      // Kritias
+      const kl = document.getElementById('ccs-kritias');
+      kl.innerHTML = '';
+      (d.kritias || []).forEach(k => {
+        const li = document.createElement('li');
+        li.className = 'ccs-kriti-item';
+        li.innerHTML = `<strong>${k.title}</strong><span>${k.composer} · ${k.language}${k.note ? ' — ' + k.note : ''}</span>`;
+        kl.appendChild(li);
+      });
+
+      // Synth
+      ccsCurrentSwaras = d.swaraList && d.swaraList.length ? d.swaraList : arohaArr;
+      const sb = document.getElementById('ccs-synth-btns');
+      sb.innerHTML = '';
+      ccsCurrentSwaras.forEach(sw => {
+        const btn = document.createElement('button');
+        btn.className = 'ccs-synth-note-btn';
+        btn.textContent = sw; btn.dataset.note = sw;
+        btn.onclick = () => window.ccsPlayNote(sw);
+        sb.appendChild(btn);
+      });
+
+      // Explore pills
+      const ep = document.getElementById('ccs-explore-pills');
+      ep.innerHTML = '';
+      (d.explorePills || []).forEach(p => {
+        const pill = document.createElement('span');
+        pill.className = 'ccs-explore-pill';
+        pill.textContent = p;
+        pill.onclick = () => ccsRun(p);
+        ep.appendChild(pill);
+      });
+
+      document.getElementById('ccs-result').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+  </script>
+</body>
+</html>
